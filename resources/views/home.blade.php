@@ -35,7 +35,6 @@
                                     @foreach ($files as $file)
                                         <tr>
                                             <td class="txt-oflo">{{ $file }}</td>
-                                            <td class="txt-oflo">{{ $file->size }}</td>
                                         </tr>
                                     </tbody>
                                     @endforeach

@@ -28,7 +28,7 @@ class HomeController extends Controller
         // $contents = Storage::get($files);
 
         $files = Storage::allfiles();
-        $size = Storage::size($files);
+        // $size = Storage::size($files);
         return view('home', compact('files'));
     }
 
