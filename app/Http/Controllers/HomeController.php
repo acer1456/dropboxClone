@@ -49,12 +49,23 @@ class HomeController extends Controller
     // }
 
     public function uploadFilePost(Request $request){
-        $request->validate([
-            'fileToUpload' => 'required|file|max:1024',
+        // $request->validate([
+        //     'fileToUpload' => 'required|file|max:1024',
+        // ]);
+
+        $this->validate($request, [
+            'fileToUpload' => 'required',
         ]);
-        // $request->fileToUpload->putFileAs('photos', new File('/path/to/photo'), 'photo.jpg');
-        $request->fileToUpload->storeAs(Auth::user()->email, $request->fileToUpload->getClientOriginalName());
-        $files = Storage::allfiles(Auth::user()->email);
-        return view('home', compact('files'));
+
+        if($request->hasfile('fileToUpload'))
+        {
+           foreach($request->file('fileToUpload') as $file)
+           {
+               $file->storeAs(Auth::user()->email, $file->getClientOriginalName());
+           }
+        }
+        
+        return back()->with('success', 'Data Your files has been successfully added');
+
     }
 }

@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+        @if(session('success'))
+        <div class="alert alert-success">
+          {{ session('success') }}
+        </div> 
+        @endif
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -10,8 +15,7 @@
                     <form action="/home" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <input type="file" class="form-control-file" name="fileToUpload" id="exampleInputFile" aria-describedby="fileHelp">
-                                <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                                <input type="file" class="form-control-file" name="fileToUpload[]" id="exampleInputFile" aria-describedby="fileHelp" multiple>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
