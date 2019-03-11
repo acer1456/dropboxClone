@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use File;
 use Storage;
+use AFM\Rsync\Rsync;
+
 
 class HomeController extends Controller
 {
@@ -25,9 +27,17 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+        $auth = Auth::user()->email;
+        $directory = storage_path('app/public/'.$auth);
+        $origin = $directory;
+
+        $target = '/Users/Wei/Desktop/sync';
+        $rsync = new Rsync;
+        $rsync->sync($origin, $target);
+
         // $directory = Storage::directories(Auth::user()->email);
-        $files = Storage::allfiles(Auth::user()->email);
+        $files = Storage::allfiles($auth);
         return view('home', compact('files'));
         // $files = Storage::allfiles();
         // // $size = Storage::size($files);

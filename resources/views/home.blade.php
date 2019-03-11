@@ -27,8 +27,8 @@
                     <table class="table ">
                                     <thead>
                                         <tr>
-                                            <th>檔案</th>
-                                            <th>大小</th>
+                                            <th>File</th>
+                                            <th>Size</th>
                                         </tr>
                                     </thead>
                                     <tbody>
