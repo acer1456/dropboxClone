@@ -7,6 +7,8 @@
           {{ session('success') }}
         </div> 
         @endif
+        <a href="{{ route('home.sync') }}" class="btn btn-primary">Sync</a>
+        <a href="{{ route('home.remove') }}" class="btn btn-primary">Remove</a>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -39,6 +41,8 @@
                                     @foreach ($files as $file)
                                         <tr>
                                             <td class="txt-oflo">{{ $file }}</td>
+                                            {{-- <td class="txt-oflo">{{ $file }}</td> --}}
+                                            {{-- <td class="txt-oflo">{{ $deletefile }}</td> --}}
                                         </tr>
                                     </tbody>
                                     @endforeach

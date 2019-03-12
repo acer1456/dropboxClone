@@ -67,7 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-        Storage::makeDirectory($data['email']);
+        // Storage::makeDirectory($data['email']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
