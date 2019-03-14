@@ -18,7 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('home/sync', 'HomeController@sync')->name('home.sync');
+Route::get('home/onlineSyncToLocal', 'HomeController@onlineSyncToLocal')->name('home.onlineSyncToLocal');
+Route::get('home/LocalSyncToOnline', 'HomeController@LocalSyncToOnline')->name('home.LocalSyncToOnline');
+
 Route::get('home/remove', 'HomeController@remove')->name('home.remove');
 // Route::get('/home','HomeController@uploadfile');
 Route::post('/home','HomeController@uploadFilePost');

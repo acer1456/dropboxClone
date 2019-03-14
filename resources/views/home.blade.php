@@ -7,7 +7,9 @@
           {{ session('success') }}
         </div> 
         @endif
-        <a href="{{ route('home.sync') }}" class="btn btn-primary">Sync</a>
+        <a href="{{ route('home.onlineSyncToLocal') }}" class="btn btn-primary">Online Sync to Local</a>
+        <a href="{{ route('home.LocalSyncToOnline') }}" class="btn btn-primary">Local Sync to online</a>
+
         <a href="{{ route('home.remove') }}" class="btn btn-primary">Remove</a>
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -34,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th>File</th>
-                                            <th>Size</th>
+                                            {{-- <th>Size</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,9 +48,8 @@
                                         </tr>
                                     </tbody>
                                     @endforeach
-
+                                    
                     </table> 
-
 
                 </div>
             </div>

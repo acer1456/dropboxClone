@@ -7,6 +7,8 @@ use Auth;
 use File;
 use Storage;
 use AFM\Rsync\Rsync;
+use ViKon\Diff\Diff;
+
 
 
 class HomeController extends Controller
@@ -27,43 +29,51 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function sync()
+    public function onlineSyncToLocal()
+    {
+        $directory = storage_path('app/public/');
+        $origin = $directory;
+        $target = '/Users/Wei/Desktop/sync/';
+        $rsync = new Rsync;
+        $rsync->sync($origin, $target);
+        return back()->with('success', 'Online data has been synced to local');
+    }
+    public function LocalSyncToOnline()
     {
         $directory = storage_path('app/public');
         $origin = $directory;
-        $target = '/Users/Wei/Desktop/sync';
+        $target = '/Users/Wei/Desktop/sync/';
         $rsync = new Rsync;
-        $rsync->sync($origin, $target);
-        return back()->with('success', 'Data has been synced');
+        $rsync->sync($target, $origin);
+        return back()->with('success', 'Local data has been synced to online');
     }
     public function remove()
     {
-        $directory = storage_path('app');
+        // $directory = storage_path('app');
         // $directories = Storage::allDirectories($directory);
-        $dirs = Storage::directories($directory);
-        foreach ($dirs as $dir) {
-            Storage::deleteDirectory($dir);
+        $files = Storage::allfiles();
+        foreach ($files as $file) {
+            Storage::delete($file);
         }
         return back()->with('success', 'All Data has been deleted');
     }
     public function index()
     {   
         // $directory = Storage::directories(Auth::user()->email);
-        $files = Storage::allfiles();
 
-        // foreach ($files as $file) {
-        //     $deletefile = Storage::delete($file);
-        // }
+        $files = Storage::allfiles();
+        foreach ($files as $file) {
+            Storage::setVisibility($file, 'public');
+            echo Storage::getVisibility($file);
+        }
+
+        // $txt = storage_path('app/public/text.py');
+        // $txt2 = Storage::get('test2.py');
+        // $diff = Diff::compareFiles($txt, $txt2);
+        // echo $diff->toHTML();
 
         return view('home', compact('files'));
-        // $files = Storage::allfiles();
-        // // $size = Storage::size($files);
-        // return view('home', compact('files'));
     }
-
-    // public function uploadFile(){
-    //     return view('uploadfile');
-    // }
 
     public function uploadFilePost(Request $request){
         // $request->validate([
