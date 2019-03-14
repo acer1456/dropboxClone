@@ -19,7 +19,7 @@
                     <form action="/home" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <input type="file" class="form-control-file" name="fileToUpload[]" id="exampleInputFile" aria-describedby="fileHelp" multiple>
+                                <input type="file" multiple="multiple" class="form-control-file" name="fileToUpload[]" id="exampleInputFile" aria-describedby="fileHelp" multiple>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

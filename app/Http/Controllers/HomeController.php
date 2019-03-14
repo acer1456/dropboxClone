@@ -87,11 +87,6 @@ class HomeController extends Controller
         {
            foreach($request->file('fileToUpload') as $file)
            {
-            //    Storage::mimeType($file);
-            //    Storage::exists($file);
-            //    Storage::type($file);
-            //    Storage::size($file);
-            //    Storage::lastModified($file);
                     
                if(Storage::exists($file->getClientOriginalName())){
                     // $newsize = Storage::size($file);
@@ -102,11 +97,15 @@ class HomeController extends Controller
 
                     // }
                }else{
-                    $file->storeAs('', $file->getClientOriginalName());
-                    return back()->with('success', 'Data added');
+                    $name = $file->getClientOriginalName();
+                    $file->storeAs('', $name);
                }
            }
         }
-
+        return back()->with('success', 'Data added');
     }
 }
+
+
+
+         
